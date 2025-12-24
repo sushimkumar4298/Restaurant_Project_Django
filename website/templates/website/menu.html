@@ -19,9 +19,11 @@
   <link rel="stylesheet" href="{% static 'css/nice-select.min.css' %}" />
   <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/cart.css' %}" />
 </head>
 
 <body class="sub_page">
+  {% include 'website/header.html' %}
 
 <div class="hero_area">
   <div class="bg-box">
@@ -29,7 +31,7 @@
   </div>
 
   <!-- HEADER -->
-  {% include 'website/header.html' %}
+  
  
 </div>
 
@@ -50,37 +52,64 @@
     </ul>
 
     <!-- 🔧 CHANGE 2: MENU ITEMS (DYNAMIC) -->
-    <div class="filters-content">
-      <div class="row grid">
+   <div class="filters-content">
+  <div class="row grid">
 
-        {% for category in categories %}
-          {% for item in category.items.all %}
-            {% if item.is_available %}
-            <div class="col-sm-6 col-lg-4 all {{ category.slug }}">
-              <div class="box">
-                <div>
-                  <div class="img-box">
-                    <!-- 🔧 MEDIA IMAGE -->
-                    <img src="{{ item.image.url }}" alt="{{ item.title }}">
-                  </div>
+    {% for category in categories %}
+      {% for item in category.items.all %}
+        {% if item.is_available %}
+        <div class="col-sm-6 col-lg-4 all {{ category.slug }}">
+          <div class="box">
+            <div>
+              <div class="img-box">
+                <!-- 🔧 MEDIA IMAGE -->
+                <img src="{{ item.image.url }}" alt="{{ item.title }}">
+              </div>
 
-                  <div class="detail-box">
-                    <h5>{{ item.title }}</h5>
-                    <p>{{ item.description|truncatechars:100 }}</p> 
+              <div class="detail-box">
+                <h5>{{ item.title }}</h5>
+                <p>{{ item.description|truncatechars:100 }}</p> 
 
-                    <div class="options">
-                      <h6>₹{{ item.price }}</h6>
-                    </div>
-                  </div>
+                <div class="options">
+                  <h6>₹{{ item.price }}</h6>
+
+                  {% if user.is_authenticated %}
+                   <button 
+                       class="order_online add-to-cart-btn "
+                         data-item-id="{{ item.id }}"
+                         data-qty="0"
+                          style="background-color: #ffbe33;
+                                color: #ffffff;
+                                border: none;
+                                padding: 6px 16px;
+                                font-size: 14px;
+                                font-weight: 600;
+                                border-radius: 25px;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+  "
+  onmouseover="this.style.backgroundColor='#e6a800'; this.style.transform='scale(1.05)'"
+  onmouseout="this.style.backgroundColor='#ffbe33'; this.style.transform='scale(1)'"
+>Add
+                    </button>
+                  {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-sm btn-warning">
+                      Login to order
+                    </a>
+                  {% endif %}
+
                 </div>
               </div>
             </div>
-            {% endif %}
-          {% endfor %}
-        {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
 
-      </div>
-    </div>
+  </div>
+</div>
+
 
   </div>
 </section>
@@ -96,6 +125,29 @@
 <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
 <script src="{% static 'js/custom.js' %}"></script>
+
+<script>
+document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+  button.addEventListener('click', function () {
+    let qty = parseInt(this.dataset.qty);
+    qty += 1;
+
+    this.dataset.qty = qty;
+    this.innerText = `+ ${qty}`;
+    this.classList.add('added');
+
+    fetch(`/add-to-cart/${this.dataset.itemId}/`, {
+      method: 'GET',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    });
+  });
+});
+</script>
+
+
+
 
 </body>
 </html>

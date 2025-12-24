@@ -1,0 +1,22 @@
+/* ===== CART BUTTON ===== */
+.cart-btn {
+  background-color: #ffbe33;
+  color: #000;
+  border: none;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cart-btn:hover {
+  background-color: #e69c00;
+  transform: scale(1.05);
+}
+
+.cart-btn.added {
+  background-color: #28a745;
+  color: #fff;
+}

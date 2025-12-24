@@ -32,17 +32,17 @@
 
 </head>
 
-<body class="sub_page">
+<body>
+    <div class="hero_area">
+      <div class="bg-box">
+        {% if hero %}
+        <img src="{{ hero.0.background_image.url }}" alt="" />
+        {% endif %}
+      </div>
 
-  <div class="hero_area">
-    <div class="bg-box">
-      <img src="{% static 'images/hero-bg.jpg' %}" alt="">
-    </div>
-    <!-- header section strats -->
-    {% include 'website/header.html' %}
-    <!-- end header section -->
-  </div>
-
+      <!-- header section strats -->
+      {% include 'website/header.html' %}
+      <!-- end header section -->
   <!-- about section -->
 
   <section class="about_section layout_padding">

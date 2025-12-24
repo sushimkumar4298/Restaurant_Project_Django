@@ -1,0 +1,97 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>My Cart - Feane</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <!-- Include header -->
+    {% include 'website/header.html' %}
+
+    <section class="cart_section layout_padding">
+      <div class="container">
+        <div class="heading_container">
+          <h2>Your Cart</h2>
+        </div>
+
+        {% if cart_items %}
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in cart_items %}
+              <tr>
+                <td>{{ item.menu_item.title }}</td>
+                <td>₹{{ item.menu_item.price }}</td>
+
+                <td>
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                      justify-content: center;
+                    "
+                  >
+                    <a
+                      href="{% url 'decrease_quantity' item.id %}"
+                      class="btn btn-sm btn-outline-danger"
+                      >−</a
+                    >
+
+                    <strong>{{ item.quantity }}</strong>
+
+                    <a
+                      href="{% url 'increase_quantity' item.id %}"
+                      class="btn btn-sm btn-outline-success"
+                      >+</a
+                    >
+                  </div>
+                </td>
+
+                <td>₹{{ item.total }}</td>
+
+                <td>
+                  <a
+                    href="{% url 'remove_from_cart' item.id %}"
+                    class="btn btn-sm btn-danger"
+                  >
+                    Remove
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cart_total text-right">
+          <h5>Total: ₹{{ total_price }}</h5>
+          <a href="#" class="btn btn-primary">Checkout</a>
+        </div>
+
+        {% else %}
+        <p>Your cart is empty.</p>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- Include footer -->
+    {% include 'website/footer.html' %}
+
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+  </body>
+</html>

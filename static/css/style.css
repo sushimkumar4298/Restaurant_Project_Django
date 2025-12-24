@@ -140,6 +140,8 @@ a:focus {
 
 .header_section {
   padding: 15px 0;
+  background-color: #000000;
+   
 }
 
 .header_section .container-fluid {
@@ -307,111 +309,14 @@ a:focus {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
   top: 0;
-}
-
-.auth-page {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #ffecd2, #fcb69f);
-  font-family: 'Poppins', sans-serif;
-}
-
-.auth-card {
-  width: 900px;
-  display: flex;
-  background: #fff;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-}
-
-/* Left Side Image */
-.auth-image {
-  width: 50%;
-  background: url("/static/images/login-food.jpg") center/cover no-repeat;
-  padding: 40px;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.auth-image h1 {
-  font-size: 36px;
-  margin-bottom: 10px;
-}
-
-.auth-image p {
-  font-size: 16px;
-  opacity: 0.9;
-}
-
-/* Right Side Form */
-.auth-form {
-  width: 50%;
-  padding: 50px;
-  text-align: center;
-}
-
-.auth-form h2 {
-  margin-bottom: 30px;
-  color: #ff5722;
-}
-
-/* Inputs */
-.input-group {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.input-group i {
+}.hero-overlay {
   position: absolute;
-  top: 50%;
-  left: 15px;
-  transform: translateY(-50%);
-  color: #999;
-}
-
-.input-group input {
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 12px 12px 12px 45px;
-  border-radius: 30px;
-  border: 1px solid #ddd;
-  outline: none;
-}
-
-.input-group input:focus {
-  border-color: #ff5722;
-}
-
-/* Button */
-.auth-form button {
-  width: 100%;
-  padding: 12px;
-  background: #ff5722;
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.auth-form button:hover {
-  background: #e64a19;
-}
-
-/* Bottom text */
-.switch-auth {
-  margin-top: 20px;
-}
-
-.switch-auth a {
-  color: #ff5722;
-  font-weight: 600;
-  text-decoration: none;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 2;
 }
 
 

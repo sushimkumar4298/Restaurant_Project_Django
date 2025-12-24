@@ -43,14 +43,20 @@ function myMap() {
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 }
 
-// client section owl carousel
 $(document).ready(function() {
+    // Bootstrap hero carousel
+    $('#customCarousel1').carousel({
+        interval: 5000,  // 5 seconds per slide
+        ride: 'carousel',
+        pause: 'hover'
+    });
+
+    // Owl carousel for client section (if you have)
     $(".client_owl-carousel").owlCarousel({
         loop: true,
         margin: 0,
         dots: false,
         nav: true,
-        navText: [],
         autoplay: true,
         autoplayHoverPause: true,
         navText: [
@@ -58,15 +64,9 @@ $(document).ready(function() {
             '<i class="fa fa-angle-right" aria-hidden="true"></i>'
         ],
         responsive: {
-            0: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            1000: {
-                items: 2
-            }
+            0: { items: 1 },
+            768: { items: 2 },
+            1000: { items: 2 }
         }
     });
 });
