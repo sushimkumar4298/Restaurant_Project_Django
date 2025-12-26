@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404, redirect
-from .models import Category, MenuItem, HeroSection, Cart, CartItem
+from .models import Category, MenuItem, HeroSection, Cart, CartItem, Address
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -172,3 +172,35 @@ def decrease_quantity(request, item_id):
         cart_item.save()
 
     return redirect('cart')
+
+@login_required
+def Checkout_view(request):
+    addresses = request.user.addresses.all()
+
+    if request.method == "POST":
+        selected_address = request.POST.get("selected_address")
+
+        # If user selected existing address
+        if selected_address:
+            address = Address.objects.get(id=selected_address, user=request.user)
+        else:
+            # Create new address
+            address = Address.objects.create(
+                user=request.user,
+                full_name=request.POST['full_name'],
+                phone=request.POST['phone'],
+                address_line=request.POST['address_line'],
+                city=request.POST['city'],
+                state=request.POST['state'],
+                pincode=request.POST['pincode']
+            )
+
+        # Save address ID in session for next step
+        request.session['address_id'] = address.id
+
+        return redirect('order_summary')  # next step (later)
+
+    return render(request, 'website/checkout.html', {
+        'addresses': addresses
+    })
+
