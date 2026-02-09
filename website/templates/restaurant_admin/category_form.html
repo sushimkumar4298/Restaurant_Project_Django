@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <style>
+        body {
+            background: #f4f6f9;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #111827;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            background: #1f2937;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #111827;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>{{ title }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Save Category</button>
+    </form>
+
+    <a href="{% url 'admin_categories' %}" class="back">← Back to Categories</a>
+</div>
+
+</body>
+</html>

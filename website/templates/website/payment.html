@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Tailwind CDN for quick styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <div class="max-w-3xl mx-auto p-6">
+    <h1 class="text-3xl font-bold text-center mb-6">🛒 Order Summary & Payment</h1>
+
+    <!-- Cart Items Card -->
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-2xl font-semibold mb-4">Your Cart</h2>
+      <ul class="divide-y divide-gray-200">
+        {% for item in cart_items %}
+        <li class="py-4 flex justify-between items-center">
+          <div class="flex items-center space-x-4">
+            <!-- Menu Item Image -->
+            <img src="{{ item.menu_item.image.url }}" alt="{{ item.menu_item.title }}" 
+                 class="w-16 h-16 object-cover rounded-lg shadow-sm">
+
+            <div>
+              <p class="font-medium text-lg">{{ item.menu_item.title }}</p>
+              <p class="text-gray-500 text-sm">Quantity: {{ item.quantity }}</p>
+            </div>
+          </div>
+
+          <p class="font-semibold text-lg">₹{{ item.menu_item.price|floatformat:0 }}</p>
+        </li>
+        {% empty %}
+        <li class="py-4 text-gray-500 text-center">Your cart is empty</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Total Amount -->
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6 flex justify-between items-center">
+      <h2 class="text-xl font-bold">Total Amount</h2>
+      <p class="text-2xl font-bold text-green-600">₹{{ total|floatformat:0 }}</p>
+    </div>
+
+    <!-- Payment Button -->
+    <div class="text-center">
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" 
+          class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-md transition-all duration-200">
+          💳 Pay Now
+        </button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

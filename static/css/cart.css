@@ -1,4 +1,6 @@
-/* ===== CART BUTTON ===== */
+/* ============================
+   CART BUTTON
+============================ */
 .cart-btn {
   background-color: #ffbe33;
   color: #000;
@@ -20,3 +22,56 @@
   background-color: #28a745;
   color: #fff;
 }
+
+/* ============================
+   FOOD MENU CARD FIX (FEANE)
+============================ */
+
+/* Force Bootstrap grid items to stretch */
+.food_section .row.grid > div {
+  display: flex;
+}
+
+/* Fix .box and hidden wrapper div */
+.food_section .box {
+  width: 100%;
+  display: flex;
+}
+
+.food_section .box > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image uniform size */
+.food_section .img-box {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.food_section .img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Content alignment */
+.food_section .detail-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title & description height lock */
+.food_section .detail-box h5 {
+  min-height: 42px;
+}
+
+.food_section .detail-box p {
+  min-height: 64px;
+}
+
+/* Price + button fixed at bottom */
+.food_section_

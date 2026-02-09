@@ -146,6 +146,14 @@ document.querySelectorAll('.add-to-cart-btn').forEach(button => {
 });
 </script>
 
+<script>
+$(window).on('load', function () {
+  $('.grid').isotope({
+    itemSelector: '.all',
+    layoutMode: 'fitRows'
+  });
+});
+</script>
 
 
 
